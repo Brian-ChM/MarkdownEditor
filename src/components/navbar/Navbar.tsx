@@ -4,7 +4,6 @@ import { Button } from "../ui/button";
 import { ActiveLink } from "../ui/ActiveLink";
 import { ModeToggle } from "../mode-toggle";
 
-// rafc
 export const Navbar = () => {
   return (
     <nav className="flex items-center justify-between px-4 py-2 bg-primary-foreground">
@@ -23,5 +22,5 @@ export const Navbar = () => {
         <ModeToggle />
       </div>
     </nav>
-  )
-}
+  );
+};
