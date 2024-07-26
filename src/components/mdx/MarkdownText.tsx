@@ -1,31 +1,24 @@
-"use client"
-import useTextStore from '@/store';
-import 'katex/dist/katex.min.css';
-import Markdown from 'react-markdown';
-import rehypeKatex from 'rehype-katex';
+"use client";
+import "katex/dist/katex.min.css";
+import Markdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
-import remarkMath from 'remark-math';
-import { CodeBlocks } from './Blocks/CodeBlocks';
+import remarkMath from "remark-math";
+import { CodeBlocks } from "./Blocks/CodeBlocks";
 
-interface TextState {
-  text: string
-  setText: (text: string) => void
-}
-
-export const MarkdownText = () => {
-  const text = useTextStore((state) => state.text)
-
+export const MarkdownText = ({ text }: { text: string }) => {
   return (
     <Markdown
-      className="markdown"
+      className="markdown break-words w-[calc(50vw-20px)]"
       remarkPlugins={[remarkMath, [remarkGfm, { singleTilde: false }]]}
-      rehypePlugins={[rehypeKatex]}
+      rehypePlugins={[rehypeKatex, rehypeRaw, rehypeSanitize]}
       components={{
-        code: CodeBlocks
+        code: CodeBlocks,
       }}
     >
       {text}
     </Markdown>
-
-  )
-}
+  );
+};
