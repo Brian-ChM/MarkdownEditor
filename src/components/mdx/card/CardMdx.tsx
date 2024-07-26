@@ -1,31 +1,36 @@
-import { HeartFilledIcon, HeartIcon, ReaderIcon, TrashIcon } from "@radix-ui/react-icons"
-import { Button } from "../../ui/button"
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../../ui/card"
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../ui/card";
+import { ButtonDelete, ButtonFavorite, ButtonRead } from "./ButtonsCard";
 
-export const CardMdx = ({ isFavorite }: { isFavorite?: boolean }) => {
+type CardMdxProps = {
+  id: string;
+  title: string;
+  content: string;
+  isFavorite: boolean;
+  createdAt: Date;
+};
 
-  const Favorite = () => isFavorite ? <HeartFilledIcon className="h-4 w-4" /> : <HeartIcon className="h-4 w-4" />
+export const CardMdx = ({ id, title, isFavorite, createdAt }: CardMdxProps) => {
+  const day = createdAt.getDate().toString().padStart(2, "0");
+  const month = createdAt.getMonth().toString().padStart(2, "0");
+  const year = createdAt.getFullYear();
 
   return (
     <Card className="h-min w-min">
       <CardHeader>
-        <CardTitle>Titulo del documento</CardTitle>
-        <CardDescription>Card Description</CardDescription>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{`${day}-${month}-${year}`}</CardDescription>
       </CardHeader>
       <CardFooter className="gap-1">
-        <Button>
-          <ReaderIcon className="mr-2 h-4 w-4" />
-          Leer más
-        </Button>
-
-        <Button variant="secondary" size="icon">
-          <Favorite />
-        </Button>
-
-        <Button variant="destructive" size="icon">
-          <TrashIcon className="h-4 w-4" />
-        </Button>
+        <ButtonRead />
+        <ButtonFavorite id={id} isFavorite={isFavorite} />
+        <ButtonDelete id={id} />
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
