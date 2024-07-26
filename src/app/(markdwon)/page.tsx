@@ -6,6 +6,6 @@ export default function Home() {
     <div className="flex flex-1 gap-1 m-2">
       <TextareaSection />
       <MarkdownSection />
-    </div >
-  )
+    </div>
+  );
 }
