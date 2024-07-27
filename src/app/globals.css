@@ -69,29 +69,36 @@
   }
 }
 
+#mdxparent > div > div {
+  display: flex !important
+}
 
 .markdown {
 
   @apply flex flex-col gap-3;
 
+  h1,h2,h3,h4,h5,h6{
+    @apply font-semibold
+  }
+
   h1 {
-    @apply text-3xl
+    @apply text-xl md:text-3xl
   }
 
   h2 {
-    @apply text-2xl
+    @apply text-lg md:text-2xl
   }
 
   h3 {
-    @apply text-xl
+    @apply text-base md:text-xl
   }
 
   h4 {
-    @apply text-lg
+    @apply text-sm md:text-lg
   }
 
   h5 {
-    @apply text-base
+    @apply text-sm md:text-base
   }
 
   h6 {
