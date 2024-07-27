@@ -3,21 +3,18 @@
 import { deleteMarkdown, toggleFavoriteMarkdown } from "@/app/lib/actions";
 import { Favorite } from "@/components/Favorite";
 import {
-  AlertDialogFooter,
-  AlertDialogHeader,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@radix-ui/react-alert-dialog";
-import { HeartFilledIcon, ReaderIcon } from "@radix-ui/react-icons";
-import { HeartIcon, TrashIcon } from "lucide-react";
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { TrashIcon, SquareArrowOutUpRight, Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const ButtonDelete = ({ id }: { id: string }) => {
@@ -67,17 +64,33 @@ export const ButtonFavorite = ({
     route.refresh();
   };
   return (
-    <Button variant="secondary" onClick={handleClickOnFavorite} size="icon">
+    <Button variant="outline" onClick={handleClickOnFavorite} size="icon">
       <Favorite isFavorite={isFavorite} />
     </Button>
   );
 };
 
-export const ButtonRead = () => {
+export const ButtonRead = ({ slug }: { slug: string }) => {
+  const route = useRouter();
+  const handleClickonRead = () => {
+    console.log(slug);
+
+    route.push(`/${slug}`);
+  };
+
   return (
-    <Button>
-      <ReaderIcon className="mr-2 h-4 w-4" />
-      Leer más
+    <Button variant="outline" onClick={handleClickonRead} size="icon">
+      <SquareArrowOutUpRight className="h-4 w-4" />
+    </Button>
+  );
+};
+
+export const ButtonEdit = () => {
+  const route = useRouter();
+
+  return (
+    <Button variant="default" size="icon">
+      <Pencil className="h-4 w-4" />
     </Button>
   );
 };
