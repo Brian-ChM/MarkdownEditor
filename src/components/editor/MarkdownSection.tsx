@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/use-toast";
 import useTextStore from "@/store";
-import { ExternalLink, Maximize, Save } from "lucide-react";
+import { Maximize, Save } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const MarkdownSection = () => {
@@ -33,26 +33,23 @@ export const MarkdownSection = () => {
   };
 
   return (
-    <section className="flex flex-col flex-1 h-[calc(100dvh-66px)] gap-1">
-      <div className="border rounded-sm flex justify-between items-center">
+    <section className="flex flex-col h-[calc(50dvh-33px)] md:grow md:h-[calc(100dvh-66px)] gap-1">
+      <div className="border rounded-sm flex justify-end items-center">
         <Button variant="ghost" onClick={handleChange}>
-          <Save className="mr-2 w-4 h-4" />
-          Guardar
+          <Save className="sm:mr-2 w-4 h-4" />
+          <span className="hidden sm:block">Guardar</span>
         </Button>
 
-        <div>
-          <Button variant="ghost">
-            <Maximize className="mr-2 w-4 h-4" />
-            Expandir
-          </Button>
-          <Button variant="ghost">
-            <ExternalLink className="mr-2 w-4 h-4" />
-            Abrir
-          </Button>
-        </div>
+        <Button variant="ghost">
+          <Maximize className="sm:mr-2 w-4 h-4" />
+          <span className="hidden sm:block">Expandir</span>
+        </Button>
       </div>
 
-      <ScrollArea className="rounded-md border flex-1 w-[calc(50vw-4px)] p-2">
+      <ScrollArea
+        id="mdxparent"
+        className="rounded-md border flex flex-1 shrink-0 p-2"
+      >
         <MarkdownText text={content} />
         <ScrollBar />
       </ScrollArea>
