@@ -3,9 +3,15 @@
 import { auth } from "@/auth";
 import prisma from "./prisma";
 
+function createSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
 export async function getCurrentUser() {
   const session = await auth();
-
   return session?.user;
 }
 
@@ -21,6 +27,35 @@ export async function getMarkdowns() {
       where: { userId: user?.id },
       orderBy: { createdAt: "asc" },
     });
+
+    return { success: true, message: "Success", data: markdown };
+  } catch (error) {
+    return {
+      success: false,
+      message: (error as Error).message || "Something went wrong",
+    };
+  }
+}
+
+export async function getMarkdownBySlug(slug: string) {
+  try {
+    if (!slug) {
+      throw new Error("Slug is required");
+    }
+
+    const user = await getCurrentUser();
+
+    if (!user) {
+      throw new Error("User not authenticated");
+    }
+
+    const markdown = await prisma.markdownText.findUnique({
+      where: { slug },
+    });
+
+    if (!markdown || markdown.userId !== user.id) {
+      throw new Error("Markdown not found or user not authorized");
+    }
 
     return { success: true, message: "Success", data: markdown };
   } catch (error) {
@@ -47,10 +82,13 @@ export async function addMarkdown(
       throw new Error("Proporcione contenido para el markdown.");
     }
 
+    const slug = createSlug(title);
+
     await prisma.markdownText.create({
       data: {
         title,
         content,
+        slug,
         isFavorite,
         userId: user.id,
       },
