@@ -5,30 +5,43 @@ import {
   CardHeader,
   CardTitle,
 } from "../../ui/card";
-import { ButtonDelete, ButtonFavorite, ButtonRead } from "./ButtonsCard";
+import {
+  ButtonDelete,
+  ButtonEdit,
+  ButtonFavorite,
+  ButtonRead,
+} from "./ButtonsCard";
 
 type CardMdxProps = {
   id: string;
   title: string;
+  slug: string;
   content: string;
   isFavorite: boolean;
   createdAt: Date;
 };
 
-export const CardMdx = ({ id, title, isFavorite, createdAt }: CardMdxProps) => {
+export const CardMdx = ({
+  id,
+  title,
+  slug,
+  isFavorite,
+  createdAt,
+}: CardMdxProps) => {
   const day = createdAt.getDate().toString().padStart(2, "0");
   const month = createdAt.getMonth().toString().padStart(2, "0");
   const year = createdAt.getFullYear();
 
   return (
-    <Card className="h-min w-min">
+    <Card className="h-min w-72">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="overflow-hidden text-nowrap">{title}</CardTitle>
         <CardDescription>{`${day}-${month}-${year}`}</CardDescription>
       </CardHeader>
       <CardFooter className="gap-1">
-        <ButtonRead />
+        <ButtonRead slug={slug} />
         <ButtonFavorite id={id} isFavorite={isFavorite} />
+        <ButtonEdit />
         <ButtonDelete id={id} />
       </CardFooter>
     </Card>
