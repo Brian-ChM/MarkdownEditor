@@ -3,7 +3,6 @@
 import useTextStore from "@/store";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { useEffect } from "react";
 
 export const TextareaSection = () => {
   const { content, setText, setTitle } = useTextStore();
@@ -17,13 +16,20 @@ export const TextareaSection = () => {
   };
 
   return (
-    <section className="flex flex-col flex-1 h-[calc(100dvh-66px)] gap-1">
-      <Input onChange={handleTitleChange} placeholder="Titulo del documento" />
-      <Textarea
-        onChange={handleTextChange}
-        value={content}
-        className="grow resize-none rounded-md border p-2"
+    <section className="flex flex-col h-[calc(50dvh-33px)] md:grow md:h-[calc(100dvh-66px)] gap-1">
+      <Input
+        className="h-[38px]"
+        onChange={handleTitleChange}
+        placeholder="Titulo del documento"
       />
+
+      <div className="flex flex-1 shrink-0">
+        <Textarea
+          onChange={handleTextChange}
+          value={content}
+          className="resize-none flex-1 shrink-0"
+        />
+      </div>
     </section>
   );
 };

@@ -11,7 +11,7 @@ import { CodeBlocks } from "./Blocks/CodeBlocks";
 export const MarkdownText = ({ text }: { text: string }) => {
   return (
     <Markdown
-      className="markdown break-words w-[calc(50vw-20px)]"
+      className="markdown break-words text-wrap block max-w-full"
       remarkPlugins={[remarkMath, [remarkGfm, { singleTilde: false }]]}
       rehypePlugins={[rehypeKatex, rehypeRaw, rehypeSanitize]}
       components={{
