@@ -17,13 +17,14 @@ export default async function Favorites() {
       <ScrollArea className="grow p-2">
         <div className="flex flex-wrap justify-center content-start gap-3">
           {favoriteMarkdowns?.map(
-            ({ id, title, content, isFavorite, createdAt }, index) => {
+            ({ id, title, content, slug, isFavorite, createdAt }, index) => {
               return (
                 <CardMdx
                   key={index}
                   id={id}
                   title={title}
                   content={content}
+                  slug={slug}
                   isFavorite={isFavorite}
                   createdAt={createdAt}
                 />
