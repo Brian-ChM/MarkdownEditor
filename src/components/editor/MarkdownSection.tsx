@@ -83,7 +83,7 @@ export const MarkdownSection = ({
 
   return (
     <section
-      className={`${expandStyle} flex flex-col md:grow md:h-[calc(100dvh-66px)] gap-1`}
+      className={`${expandStyle} flex  max-w-[calc(100vw-18px)] flex-col md:grow md:h-[calc(100dvh-66px)] gap-1`}
     >
       <div className="border rounded-sm flex justify-end items-center">
         <Button variant="ghost" onClick={handleChange}>

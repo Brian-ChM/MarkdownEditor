@@ -19,7 +19,7 @@ export const TextareaSection = () => {
 
   return (
     <section
-      className={`${expandStyle} flex flex-col h-[calc(50dvh-33px)] md:grow md:h-[calc(100dvh-66px)] gap-1`}
+      className={`${expandStyle} flex flex-col max-w-full h-[calc(50dvh-33px)] md:grow md:h-[calc(100dvh-66px)] gap-1`}
     >
       <Input
         value={title}
