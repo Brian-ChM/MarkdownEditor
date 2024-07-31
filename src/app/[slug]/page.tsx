@@ -1,10 +1,7 @@
+import { ButtonEdit, ButtonFavorite } from "@/components/mdx/card/ButtonsCard";
 import { MarkdownText } from "@/components/mdx/MarkdownText";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getMarkdownBySlug } from "../lib/actions";
-import { Favorite } from "@/components/Favorite";
-import { ButtonEdit, ButtonFavorite } from "@/components/mdx/card/ButtonsCard";
 
 type ReadMdxProps = {
   params: { slug: string };
