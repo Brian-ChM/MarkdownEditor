@@ -1,14 +1,10 @@
-import type { NextAuthConfig } from "next-auth"
-import Github from "next-auth/providers/github"
-import Google from "next-auth/providers/google"
+import type { NextAuthConfig } from "next-auth";
+import Github from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 
 export default {
-  providers: [
-    Github,
-    Google,
-  ],
+  providers: [Github, Google],
   pages: {
     signIn: "auth/login",
-    verifyRequest: "auth/verify"
-  }
-} satisfies NextAuthConfig
+  },
+} satisfies NextAuthConfig;

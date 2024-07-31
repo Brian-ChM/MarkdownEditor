@@ -137,3 +137,51 @@ export async function toggleFavoriteMarkdown(id: string, isFavorite: boolean) {
     return { message: "Something went wrong" };
   }
 }
+
+export async function editMarkdown(
+  slug: string,
+  title: string,
+  content: string
+) {
+  try {
+    const user = await getCurrentUser();
+
+    if (!user || !user.id) {
+      throw new Error("Usuario no autenticado");
+    } else if (!title.trim()) {
+      throw new Error("Proporcione un título para el markdown.");
+    } else if (!content.trim()) {
+      throw new Error("Proporcione contenido para el markdown.");
+    }
+
+    const newSlug = createSlug(title);
+
+    const existingMarkdown = await prisma.markdownText.findUnique({
+      where: { slug },
+    });
+
+    if (!existingMarkdown) {
+      throw new Error("El registro de markdown no existe.");
+    }
+
+    const updatedMarkdown = await prisma.markdownText.update({
+      where: { slug },
+      data: {
+        title,
+        content,
+        slug: newSlug,
+      },
+    });
+
+    return {
+      success: true,
+      message: "Markdown actualizado!",
+      data: updatedMarkdown,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: (error as Error).message || "Something went wrong",
+    };
+  }
+}

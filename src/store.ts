@@ -4,6 +4,8 @@ import { devtools, persist } from "zustand/middleware";
 interface TextState {
   title: string;
   content: string;
+  expand: boolean;
+  setExpand: () => void;
   setTitle: (newTitle: string) => void;
   setText: (newText: string) => void;
 }
@@ -30,6 +32,8 @@ const useMarkdownStore = create<TextState>()(
     persist(
       (set) => ({
         ...getInitialState(),
+        expand: false,
+        setExpand: () => set((state) => ({ expand: !state.expand })),
         setTitle: (newTitle) => set({ title: newTitle }),
         setText: (newContent) => set({ content: newContent }),
       }),

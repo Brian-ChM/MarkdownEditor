@@ -1,11 +1,11 @@
 "use client";
 
-import useTextStore from "@/store";
+import useMarkdownStore from "@/store";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 
 export const TextareaSection = () => {
-  const { content, setText, setTitle } = useTextStore();
+  const { title, content, expand, setText, setTitle } = useMarkdownStore();
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
@@ -15,9 +15,14 @@ export const TextareaSection = () => {
     setTitle(e.target.value);
   };
 
+  const expandStyle = expand ? "hidden" : "flex";
+
   return (
-    <section className="flex flex-col h-[calc(50dvh-33px)] md:grow md:h-[calc(100dvh-66px)] gap-1">
+    <section
+      className={`${expandStyle} flex flex-col h-[calc(50dvh-33px)] md:grow md:h-[calc(100dvh-66px)] gap-1`}
+    >
       <Input
+        value={title}
         className="h-[38px]"
         onChange={handleTitleChange}
         placeholder="Titulo del documento"

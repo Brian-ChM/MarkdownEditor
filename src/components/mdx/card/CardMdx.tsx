@@ -1,3 +1,4 @@
+import { format } from "@formkit/tempo";
 import {
   Card,
   CardDescription,
@@ -28,20 +29,20 @@ export const CardMdx = ({
   isFavorite,
   createdAt,
 }: CardMdxProps) => {
-  const day = createdAt.getDate().toString().padStart(2, "0");
-  const month = createdAt.getMonth().toString().padStart(2, "0");
-  const year = createdAt.getFullYear();
+  const date = format(createdAt, "full");
 
   return (
     <Card className="h-min w-72">
       <CardHeader>
-        <CardTitle className="overflow-hidden text-nowrap">{title}</CardTitle>
-        <CardDescription>{`${day}-${month}-${year}`}</CardDescription>
+        <CardTitle className="text-nowrap overflow-hidden pb-0.5">
+          {title}
+        </CardTitle>
+        <CardDescription>{date}</CardDescription>
       </CardHeader>
       <CardFooter className="gap-1">
         <ButtonRead slug={slug} />
-        <ButtonFavorite id={id} isFavorite={isFavorite} />
-        <ButtonEdit />
+        <ButtonFavorite id={id} isFavorite={isFavorite} variant="outline" />
+        <ButtonEdit slug={slug} />
         <ButtonDelete id={id} />
       </CardFooter>
     </Card>

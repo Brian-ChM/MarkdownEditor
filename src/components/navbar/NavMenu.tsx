@@ -5,6 +5,25 @@ import { ModeToggle } from "../mode-toggle";
 import { ActiveLink } from "../ui/ActiveLink";
 import { Button } from "../ui/button";
 
+const menuItems = [
+  {
+    href: "/",
+    text: "Editor",
+  },
+  {
+    href: "/saves",
+    text: "Guardados",
+  },
+  {
+    href: "/favorites",
+    text: "Favoritos",
+  },
+  {
+    href: "/profile",
+    text: "Perfil",
+  },
+];
+
 export const NavMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -29,14 +48,14 @@ export const NavMenu = () => {
             !showMenu && "hidden"
           }`}
         >
-          <ActiveLink onClick={toggleMenu} href={"/"} text={"Editor"} />
-          <ActiveLink onClick={toggleMenu} href={"/saves"} text={"Guardados"} />
-          <ActiveLink
-            onClick={toggleMenu}
-            href={"/favorites"}
-            text={"Favoritos"}
-          />
-          <ActiveLink onClick={toggleMenu} href={"/profile"} text={"Perfil"} />
+          {menuItems.map(({ href, text }, index) => (
+            <ActiveLink
+              key={index}
+              onClick={() => setShowMenu(false)}
+              href={href}
+              text={text}
+            />
+          ))}
         </div>
 
         <ModeToggle />
