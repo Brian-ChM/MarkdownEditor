@@ -23,7 +23,7 @@ export default async function ReadMdx({ params }: ReadMdxProps) {
 
   return (
     <section className="w-full flex justify-center py-12">
-      <div className="max-w-2xl">
+      <div className="max-w-[calc(100vw-16px)] md:max-w-2xl">
         <MarkdownText text={content} />
       </div>
       <div className="fixed bottom-10 right-10 flex flex-col gap-3">
