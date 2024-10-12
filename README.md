@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Markdown Editor
 
-## Getting Started
+Bienvenido a **Markdown Editor**, una aplicación web simple y eficiente para escribir y editar contenido en formato Markdown. Con una interfaz intuitiva y diseño responsivo, este editor está diseñado para facilitarte la creación de contenido de una forma rápida y sencilla.
 
-First, run the development server:
+## Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Editor en tiempo real**: Edita Markdown y visualiza la vista previa en tiempo real.
+- **Fácil configuración**: Utiliza Docker y Prisma para gestionar la base de datos de forma sencilla.
+- **Compatibilidad total con Markdown**: Soporte completo para la sintaxis Markdown.
+- **Listo para usar**: Proyecto optimizado para entornos de desarrollo y producción.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Requisitos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Asegúrate de tener instalado lo siguiente en tu entorno de desarrollo:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [Node.js](https://nodejs.org/)
+- [Docker](https://www.docker.com/) (para la base de datos PostgreSQL)
+- [Prisma CLI](https://www.prisma.io/docs/getting-started) (instalado automáticamente)
 
-## Learn More
+## Instalación
 
-To learn more about Next.js, take a look at the following resources:
+Sigue los siguientes pasos para poner en marcha el proyecto localmente.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clona el repositorio** y navega dentro de él:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/tu-usuario/markdown-editor.git
+   cd markdown-editor
+   ```
 
-## Deploy on Vercel
+2. **Renombra el archivo `.env.example` a `.env`:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   Este archivo contiene las variables de entorno necesarias para el funcionamiento del proyecto. Asegúrate de completar las siguientes variables dentro del archivo `.env`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ### Variables de entorno necesarias:
+
+   - **AUTH_SECRET**: Una clave secreta que puedes generar manualmente o utilizando una herramienta de generación de secretos como [1Password](https://1password.com/) o la función `openssl rand -base64 32` en la terminal.
+   - **DB_USER**: Nombre de usuario de la base de datos.
+   - **DB_NAME**: Nombre de la base de datos.
+   - **DB_PASSWORD**: Contraseña de acceso a la base de datos.
+   - **DATABASE_URL**: La cadena de conexión completa de la base de datos PostgreSQL, que sigue este formato:
+
+     ```plaintext
+     postgres://user:password@localhost:5432/markdown_editor
+     ```
+
+   - **AUTH_GITHUB_ID** y **AUTH_GITHUB_SECRET**: Puedes obtenerlos registrando una nueva aplicación OAuth en GitHub desde [GitHub Developer Settings](https://github.com/settings/developers).
+   - **AUTH_GOOGLE_ID** y **AUTH_GOOGLE_SECRET**: Puedes obtenerlos creando credenciales de OAuth 2.0 en la consola de Google Cloud desde [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
+
+3. **Instala las dependencias:**
+
+   ```bash
+   npm install
+   ```
+
+4. **Levanta el contenedor de la base de datos:**
+
+   Utiliza Docker Compose para iniciar el servicio de PostgreSQL en segundo plano.
+
+   ```bash
+   docker-compose up -d
+   ```
+
+5. **Aplica los cambios a la base de datos con Prisma:**
+
+   Prisma sincronizará el esquema definido en `prisma/schema.prisma` con la base de datos.
+
+   ```bash
+   npx prisma db push
+   ```
+
+6. **Inicia el servidor en modo desarrollo:**
+
+   Ahora puedes iniciar la aplicación en modo desarrollo con el siguiente comando:
+
+   ```bash
+   npm run dev
+   ```
+
+   La aplicación estará disponible en [http://localhost:3000](http://localhost:3000).
+
+## Uso
+
+Con la aplicación corriendo, puedes acceder a la interfaz en tu navegador e iniciar la edición de archivos en formato Markdown. Puedes visualizar en tiempo real cómo se renderiza tu contenido.
+
+---
+
+Así está optimizado el README para que los desarrolladores puedan configurarlo rápidamente con las variables de entorno correctas.
