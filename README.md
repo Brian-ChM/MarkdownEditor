@@ -82,7 +82,3 @@ Sigue los siguientes pasos para poner en marcha el proyecto localmente.
 ## Uso
 
 Con la aplicación corriendo, puedes acceder a la interfaz en tu navegador e iniciar la edición de archivos en formato Markdown. Puedes visualizar en tiempo real cómo se renderiza tu contenido.
-
----
-
-Así está optimizado el README para que los desarrolladores puedan configurarlo rápidamente con las variables de entorno correctas.
